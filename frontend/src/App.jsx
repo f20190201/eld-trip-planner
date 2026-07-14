@@ -13,6 +13,32 @@ const STOP_ICONS = {
   restart: { ico: "🔄", bg: "rgba(148,163,184,.14)", color: "#94a3b8" },
 };
 
+function LoadingCard() {
+  // If the request drags on (free-tier backend waking from hibernation),
+  // explain the wait instead of leaving the user staring at a spinner.
+  const [slow, setSlow] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setSlow(true), 6000);
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <div className="card loading">
+      <div className="load-inner">
+        <span className="load-truck">🚛</span>
+        <div className="load-road" />
+        Geocoding, routing and simulating Hours-of-Service…
+        {slow && (
+          <div className="cold-hint">
+            Still working — the backend runs on a free hosting tier and
+            hibernates when idle. The first request of a session can take up
+            to a minute while the server wakes up.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function Stat({ k, v, unit, ico, color }) {
   return (
     <div className="stat" style={{ "--stat-color": color }}>
@@ -109,15 +135,7 @@ export default function App() {
             </div>
           )}
 
-          {loading && (
-            <div className="card loading">
-              <div className="load-inner">
-                <span className="load-truck">🚛</span>
-                <div className="load-road" />
-                Geocoding, routing and simulating Hours-of-Service…
-              </div>
-            </div>
-          )}
+          {loading && <LoadingCard />}
 
           {trip && !loading && (
             <>

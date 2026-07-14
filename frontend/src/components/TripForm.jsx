@@ -1,6 +1,10 @@
 import { useState } from "react";
 import LocationInput from "./LocationInput.jsx";
 
+// True when built against a remote backend (e.g. Render free tier) — used to
+// warn about cold starts. Local dev proxies to a local Django, so no note.
+const REMOTE_API = Boolean(import.meta.env.VITE_API_BASE);
+
 const SAMPLES = [
   {
     label: "Chicago → St. Louis → Dallas",
@@ -111,6 +115,14 @@ export default function TripForm({ onSubmit, loading, error }) {
       </form>
 
       {error && <div className="error-box">⚠ {error}</div>}
+
+      {REMOTE_API && (
+        <div className="cold-note">
+          ⚡ <b>Heads up:</b> the backend runs on a free hosting tier and
+          hibernates when idle — the first plan of a session may take up to a
+          minute while the server wakes up. Subsequent plans are fast.
+        </div>
+      )}
 
       <div className="samples">
         <div className="samples-label">Try an example</div>

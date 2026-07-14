@@ -447,6 +447,34 @@ input {
   font-weight: 500;
 }
 
+.cold-note {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-dim);
+  background: var(--surface-2);
+  border: 1px dashed var(--border-strong);
+  padding: 10px 12px;
+  border-radius: 11px;
+}
+
+.cold-note b {
+  color: var(--accent-soft);
+}
+
+.cold-hint {
+  margin-top: 14px;
+  max-width: 380px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--accent-soft);
+  background: var(--ring);
+  border: 1px solid var(--ring);
+  padding: 10px 13px;
+  border-radius: 11px;
+  animation: rise 0.3s ease both;
+}
+
 .samples {
   margin-top: 20px;
   border-top: 1px dashed var(--border-strong);

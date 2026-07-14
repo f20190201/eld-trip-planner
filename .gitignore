@@ -6,6 +6,8 @@ __pycache__/
 db.sqlite3
 backend/staticfiles/
 .env
+.env.local
+.env.*.local
 *.log
 
 # Node / Vite
